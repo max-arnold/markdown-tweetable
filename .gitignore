@@ -1,0 +1,10 @@
+*~
+\.\#*
+*.pyc
+*.pyo
+*.orig
+*.rej
+*.egg-info
+dist/
+build/
+\.DS_Store
