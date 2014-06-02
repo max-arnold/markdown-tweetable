@@ -34,3 +34,21 @@ SNIPPET = '''<blockquote class="tweetable">
 <p>{quote}</p>
 <footer>{footer}</footer>
 </blockquote>'''
+
+
+class TweetablePattern(Pattern):
+    pass
+
+
+class TweetableExtension(Extension):
+    pass
+
+
+def makeExtension(configs=None):
+    return TweetableExtension(configs=configs)
+
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod(optionflags=(doctest.NORMALIZE_WHITESPACE +
+                                 doctest.REPORT_NDIFF))
