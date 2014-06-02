@@ -5,12 +5,18 @@ Why this extension? A lot of blog posts have social sharing buttons at the top o
 
 With this extension you will be able to turn the text below
 
-    [tweetable]When there is state there can be no freedom, but when there is freedom there will be no state. -- Vladimir Lenin[/tweetable]
+    [tweetable]
+    When there is state there can be no freedom,
+    but when there is freedom there will be no state.
+    -- Vladimir Lenin
+    [/tweetable]
 
 into the following html markup
 
     <blockquote class="tweetable">
-    <p>When there is state there can be no freedom, but when there is freedom there will be no state. -- Vladimir Lenin</p>
+    <p>When there is state there can be no freedom,
+    but when there is freedom there will be no state.
+    -- Vladimir Lenin</p>
     <footer>[Social share buttons code]</footer>
     </blockquote>
 
