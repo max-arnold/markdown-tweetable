@@ -21,3 +21,16 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import print_function, unicode_literals
+
+from markdown.extensions import Extension
+from markdown.inlinepatterns import Pattern
+
+TWEETABLE_RE = r'\[tweetable\](?P<quote>.+)\[/tweetable\]'
+
+NETWORKS = ('google', 'facebook', 'twitter', 'vkontakte',)
+
+SNIPPET = '''<blockquote class="tweetable">
+<p>{quote}</p>
+<footer>{footer}</footer>
+</blockquote>'''
