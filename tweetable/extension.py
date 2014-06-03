@@ -37,11 +37,34 @@ SNIPPET = '''<blockquote class="tweetable">
 
 
 class TweetablePattern(Pattern):
-    pass
+    """InlinePattern for tweetable quotes"""
+    def __init__(self, pattern, config, markdown_instance=None):
+        super(TweetablePattern, self).__init__(pattern, markdown_instance=markdown_instance)
+        self.config = config
+
+    def handleMatch(self, m):
+        quote = m.group('quote').strip()
+        # TODO: validate length
+        return self.config['snippet']
 
 
 class TweetableExtension(Extension):
-    pass
+    def __init__(self, configs={}):
+        # set extension defaults
+        self.config = {
+            'networks': [NETWORKS, 'Social networks for sharing.'],
+            'snippet': [SNIPPET, 'HTML snippet.']
+        }
+
+        # TODO: validate networks
+        # Override defaults with user settings
+        for key, value in configs:
+            self.setConfig(key, value)
+
+    def extendMarkdown(self, md, md_globals):
+        tweetable_md_pattern = TweetablePattern(TWEETABLE_RE, self.getConfigs())
+        md.inlinePatterns.add('tweetable', tweetable_md_pattern, '_end')
+        md.registerExtension(self)
 
 
 def makeExtension(configs=None):
