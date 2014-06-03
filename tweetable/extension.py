@@ -45,7 +45,9 @@ class TweetablePattern(Pattern):
     def handleMatch(self, m):
         quote = m.group('quote').strip()
         # TODO: validate length
-        return self.config['snippet']
+        snippet = self.config['snippet']
+        placeholder = self.markdown.htmlStash.store(snippet)
+        return placeholder
 
 
 class TweetableExtension(Extension):
@@ -62,7 +64,7 @@ class TweetableExtension(Extension):
             self.setConfig(key, value)
 
     def extendMarkdown(self, md, md_globals):
-        tweetable_md_pattern = TweetablePattern(TWEETABLE_RE, self.getConfigs())
+        tweetable_md_pattern = TweetablePattern(TWEETABLE_RE, self.getConfigs(), markdown_instance=md)
         md.inlinePatterns.add('tweetable', tweetable_md_pattern, '_end')
         md.registerExtension(self)
 
