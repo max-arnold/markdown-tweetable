@@ -51,7 +51,9 @@ class TweetablePattern(Pattern):
 
 
 class TweetableExtension(Extension):
-    def __init__(self, configs={}):
+    def __init__(self, configs=()):
+        configs = dict(configs) or {}
+
         # set extension defaults
         self.config = {
             'networks': [NETWORKS, 'Social networks for sharing.'],
