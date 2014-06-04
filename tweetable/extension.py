@@ -60,7 +60,12 @@ class TweetableExtension(Extension):
             'snippet': [SNIPPET, 'HTML snippet.']
         }
 
-        # TODO: validate networks
+        # Validate network list
+        networks = configs.get('networks', ()).split(';')
+        diff = set(networks).difference(set(NETWORKS))
+        if diff:
+            raise ValueError('Unsupported social network(s): %s' % networks)
+
         # Override defaults with user settings
         for key, value in configs:
             self.setConfig(key, value)
