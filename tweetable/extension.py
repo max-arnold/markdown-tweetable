@@ -45,7 +45,7 @@ class TweetablePattern(Pattern):
     def handleMatch(self, m):
         quote = m.group('quote').strip()
         # TODO: validate length
-        snippet = self.config['snippet']
+        snippet = self.config['snippet'].format(quote=quote, footer='')
         placeholder = self.markdown.htmlStash.store(snippet)
         return placeholder
 
