@@ -61,13 +61,16 @@ class TweetableExtension(Extension):
         }
 
         # Validate network list
-        networks = configs.get('networks', ()).split(';')
+        networks = tuple(filter(None, configs.pop('networks', '').split(';')))
         diff = set(networks).difference(set(NETWORKS))
         if diff:
-            raise ValueError('Unsupported social network(s): %s' % networks)
+            raise ValueError('Unsupported social network(s): {}'.format(', '.join(list(diff))))
+
+        networks = networks or NETWORKS
+        self.setConfig('networks', networks)
 
         # Override defaults with user settings
-        for key, value in configs:
+        for key, value in configs.items():
             self.setConfig(key, value)
 
     def extendMarkdown(self, md, md_globals):
