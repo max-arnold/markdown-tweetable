@@ -32,7 +32,7 @@ NETWORKS = ('google', 'facebook', 'twitter', 'vkontakte',)
 
 SNIPPET = '''<blockquote class="tweetable">
 <p>{quote}</p>
-<footer>{footer}</footer>
+<p class="tweetable-buttons">{buttons}</p>
 </blockquote>'''
 
 
@@ -41,11 +41,12 @@ class TweetablePattern(Pattern):
     def __init__(self, pattern, config, markdown_instance=None):
         super(TweetablePattern, self).__init__(pattern, markdown_instance=markdown_instance)
         self.config = config
+        print(config)
 
     def handleMatch(self, m):
         quote = m.group('quote').strip()
         # TODO: validate length
-        snippet = self.config['snippet'].format(quote=quote, footer='')
+        snippet = self.config['snippet'].format(quote=quote, buttons='')
         placeholder = self.markdown.htmlStash.store(snippet)
         return placeholder
 
