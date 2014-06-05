@@ -22,6 +22,7 @@
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 from __future__ import print_function, unicode_literals
+from urllib import quote_plus
 
 from markdown.extensions import Extension
 from markdown.inlinepatterns import Pattern
@@ -56,6 +57,19 @@ data-prefilltext="{headline}">Google+</span>'''
 #  })();
 # </script>
 
+BUTTONS = {
+    'google': GOOGLE,
+    'facebook': FACEBOOK,
+    'twitter': TWITTER,
+    'vkontakte': VKONTAKTE,
+}
+
+
+def create_buttons(networks, url, headline):
+    buttons = [BUTTONS[n].format(url=quote_plus(url), headline=quote_plus(headline)) for n in networks]
+    return '\n'.join(buttons)
+
+
 class TweetablePattern(Pattern):
     """InlinePattern for tweetable quotes"""
     def __init__(self, pattern, config, markdown_instance=None):
@@ -64,8 +78,9 @@ class TweetablePattern(Pattern):
 
     def handleMatch(self, m):
         quote = m.group('quote').strip()
+        buttons = create_buttons(self.config['networks'], 'http://example.com', quote)
         # TODO: validate length
-        snippet = self.config['snippet'].format(quote=quote, buttons='')
+        snippet = self.config['snippet'].format(quote=quote, buttons=buttons)
         placeholder = self.markdown.htmlStash.store(snippet)
         return placeholder
 
