@@ -35,6 +35,28 @@ SNIPPET = '''<blockquote class="tweetable">
 <p class="tweetable-buttons">{buttons}</p>
 </blockquote>'''
 
+TWITTER = '<a class="" title="Twitter" href="http://twitter.com/home/?status=" target="_blank">'
+
+FACEBOOK = '<a class="" title="Facebook" href="http://www.facebook.com/sharer.php?u=" target="_blank">'
+
+VKONTAKTE = '<a class="" title="Vkontakte" href="http://vk.com/share.php?url=&title=" target="_blank">'
+
+GOOGLE = '''<span class="g-interactivepost"
+data-contenturl="https://plus.google.com/pages/"
+data-clientid="xxxxx.apps.googleusercontent.com"
+data-cookiepolicy="single_host_origin"
+data-prefilltext="Engage your users today, create a Google+ page for your business."
+data-calltoactionurl="http://plus.google.com/pages/create"
+Tell your friends
+</span>'''
+
+# <script type="text/javascript">
+#   (function() {
+#    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+#    po.src = 'https://apis.google.com/js/client:plusone.js';
+#    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+#  })();
+# </script>
 
 class TweetablePattern(Pattern):
     """InlinePattern for tweetable quotes"""
