@@ -17,9 +17,8 @@ into the following html markup
     <p>When there is state there can be no freedom,
     but when there is freedom there will be no state.
     -- Vladimir Lenin</p>
-    <footer>[Social share buttons code]</footer>
+    <p class="tweetable-buttons">SOCIAL_SHARE_BUTTONS_CODE</p>
     </blockquote>
-
 
 Installation
 ------------
@@ -29,16 +28,16 @@ Installation
 Usage
 -----
 
+TODO
+
 Dependencies
 ------------
 
-* [Markdown 2.0+](http://www.freewisdom.org/projects/python-markdown/)
+* [Markdown 2.0+](http://pythonhosted.org/Markdown/)
 
 Copyright
 ---------
 
-- 2014 [Max Arnold](http://ar0.me/)
-
-All rights reserved.
+Copyright 2014 [Max Arnold](http://ar0.me/), all rights reserved.
 
 This software is released under the BSD License.
