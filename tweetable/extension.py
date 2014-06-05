@@ -63,7 +63,6 @@ class TweetablePattern(Pattern):
     def __init__(self, pattern, config, markdown_instance=None):
         super(TweetablePattern, self).__init__(pattern, markdown_instance=markdown_instance)
         self.config = config
-        print(config)
 
     def handleMatch(self, m):
         quote = m.group('quote').strip()
