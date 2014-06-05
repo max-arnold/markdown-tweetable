@@ -35,20 +35,18 @@ SNIPPET = '''<blockquote class="tweetable">
 <p class="tweetable-buttons">{buttons}</p>
 </blockquote>'''
 
-TWITTER = '<a class="" title="Twitter" href="http://twitter.com/home/?status=" target="_blank">'
+TWITTER = '<a class="" title="Twitter" href="https://twitter.com/share?text={headline}&url={url}" target="_blank">Twitter</a>'
 
-FACEBOOK = '<a class="" title="Facebook" href="http://www.facebook.com/sharer.php?u=" target="_blank">'
+FACEBOOK = '<a class="" title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_blank">Facebook</a>'
 
-VKONTAKTE = '<a class="" title="Vkontakte" href="http://vk.com/share.php?url=&title=" target="_blank">'
+VKONTAKTE = '<a class="" title="VKontakte" href="https://vk.com/share.php?url={url}&title={headline}" target="_blank">VKontakte</a>'
 
 GOOGLE = '''<span class="g-interactivepost"
-data-contenturl="https://plus.google.com/pages/"
 data-clientid="xxxxx.apps.googleusercontent.com"
 data-cookiepolicy="single_host_origin"
-data-prefilltext="Engage your users today, create a Google+ page for your business."
-data-calltoactionurl="http://plus.google.com/pages/create"
-Tell your friends
-</span>'''
+data-contenturl="{url}"
+data-calltoactionurl="{url}"
+data-prefilltext="{headline}">Google+</span>'''
 
 # <script type="text/javascript">
 #   (function() {
@@ -75,6 +73,10 @@ class TweetablePattern(Pattern):
 class TweetableExtension(Extension):
     def __init__(self, configs=()):
         configs = dict(configs) or {}
+
+        # TODO: button class customization
+        # TODO: google client id customization
+        # TODO: optional twitter CC
 
         # set extension defaults
         self.config = {
