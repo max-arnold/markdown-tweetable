@@ -36,12 +36,17 @@ SNIPPET = '''<blockquote class="tweetable">
 <p class="tweetable-buttons">{buttons}</p>
 </blockquote>'''
 
+# https://dev.twitter.com/docs/tweet-button
 TWITTER = '<a class="" title="Twitter" href="https://twitter.com/share?text={headline}&url={url}" target="_blank">Twitter</a>'
 
+# https://developers.facebook.com/docs/plugins/share-button/
+# http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-no-longer-accept-detailed-parameters
 FACEBOOK = '<a class="" title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_blank">Facebook</a>'
 
+# http://vk.com/dev/share_details
 VKONTAKTE = '<a class="" title="VKontakte" href="https://vk.com/share.php?url={url}&title={headline}" target="_blank">VKontakte</a>'
 
+# https://developers.google.com/+/web/share/interactive
 GOOGLE = '''<span class="g-interactivepost"
 data-clientid="xxxxx.apps.googleusercontent.com"
 data-cookiepolicy="single_host_origin"
@@ -80,6 +85,7 @@ class TweetablePattern(Pattern):
         quote = m.group('quote').strip()
         buttons = create_buttons(self.config['networks'], 'http://example.com', quote)
         # TODO: validate length
+        # short_url_length_https: 23, short_url_length: 22, total_length: 140
         snippet = self.config['snippet'].format(quote=quote, buttons=buttons)
         placeholder = self.markdown.htmlStash.store(snippet)
         return placeholder
