@@ -36,16 +36,6 @@ SNIPPET = '''<blockquote class="tweetable">
 <p class="tweetable-buttons">{buttons}</p>
 </blockquote>'''
 
-# https://dev.twitter.com/docs/tweet-button
-TWITTER = '<a class="" title="Twitter" href="https://twitter.com/share?text={headline}&url={url}" target="_blank">Twitter</a>'
-
-# https://developers.facebook.com/docs/plugins/share-button/
-# http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-no-longer-accept-detailed-parameters
-FACEBOOK = '<a class="" title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_blank">Facebook</a>'
-
-# http://vk.com/dev/share_details
-VKONTAKTE = '<a class="" title="VKontakte" href="https://vk.com/share.php?url={url}&title={headline}" target="_blank">VKontakte</a>'
-
 # https://developers.google.com/+/web/share/interactive
 GOOGLE = '''<span class="g-interactivepost"
 data-clientid="{gcid}"
@@ -62,18 +52,46 @@ data-prefilltext="{headline}">Google+</span>'''
 #  })();
 # </script>
 
+def create_google_button(url, headline, config):
+    return GOOGLE.format(url=url,
+                         headline=headline,
+                         gcid=config['gcid'])
+
+
+# https://developers.facebook.com/docs/plugins/share-button/
+# http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-no-longer-accept-detailed-parameters
+FACEBOOK = '<a class="" title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_blank">Facebook</a>'
+
+def create_facebook_button(url, headline, config):
+    return FACEBOOK.format(url=quote_plus(url),
+                           headline=quote_plus(headline))
+
+
+# https://dev.twitter.com/docs/tweet-button
+TWITTER = '<a class="" title="Twitter" href="https://twitter.com/share?text={headline}&url={url}" target="_blank">Twitter</a>'
+
+def create_twitter_button(url, headline, config):
+    return TWITTER.format(url=quote_plus(url),
+                          headline=quote_plus(headline))
+
+
+# http://vk.com/dev/share_details
+VKONTAKTE = '<a class="" title="VKontakte" href="https://vk.com/share.php?url={url}&title={headline}" target="_blank">VKontakte</a>'
+
+def create_vkontakte_button(url, headline, config):
+    return VKONTAKTE.format(url=quote_plus(url),
+                            headline=quote_plus(headline))
+
+
 BUTTONS = {
-    'google': GOOGLE,
-    'facebook': FACEBOOK,
-    'twitter': TWITTER,
-    'vkontakte': VKONTAKTE,
+    'google': create_google_button,
+    'facebook': create_facebook_button,
+    'twitter': create_twitter_button,
+    'vkontakte': create_vkontakte_button,
 }
 
-
 def create_buttons(url, headline, config):
-    buttons = [BUTTONS[n].format(url=quote_plus(url),
-                                 headline=quote_plus(headline),
-                                 gcid=config['gcid']) for n in config['networks']]
+    buttons = [BUTTONS[n](url, headline, config) for n in config['networks']]
     return '\n'.join(buttons)
 
 
