@@ -48,7 +48,7 @@ VKONTAKTE = '<a class="" title="VKontakte" href="https://vk.com/share.php?url={u
 
 # https://developers.google.com/+/web/share/interactive
 GOOGLE = '''<span class="g-interactivepost"
-data-clientid="xxxxx.apps.googleusercontent.com"
+data-clientid="{gcid}"
 data-cookiepolicy="single_host_origin"
 data-contenturl="{url}"
 data-calltoactionurl="{url}"
@@ -70,8 +70,10 @@ BUTTONS = {
 }
 
 
-def create_buttons(networks, url, headline):
-    buttons = [BUTTONS[n].format(url=quote_plus(url), headline=quote_plus(headline)) for n in networks]
+def create_buttons(url, headline, config):
+    buttons = [BUTTONS[n].format(url=quote_plus(url),
+                                 headline=quote_plus(headline),
+                                 gcid=config['gcid']) for n in config['networks']]
     return '\n'.join(buttons)
 
 
@@ -83,7 +85,7 @@ class TweetablePattern(Pattern):
 
     def handleMatch(self, m):
         quote = m.group('quote').strip()
-        buttons = create_buttons(self.config['networks'], 'http://example.com', quote)
+        buttons = create_buttons('http://example.com', quote, self.config)
         # TODO: validate length
         # short_url_length_https: 23, short_url_length: 22, total_length: 140
         snippet = self.config['snippet'].format(quote=quote, buttons=buttons)
@@ -102,7 +104,8 @@ class TweetableExtension(Extension):
         # set extension defaults
         self.config = {
             'networks': [NETWORKS, 'Social networks for sharing.'],
-            'snippet': [SNIPPET, 'HTML snippet.']
+            'snippet': [SNIPPET, 'HTML snippet.'],
+            'gcid': ['xxxxx.apps.googleusercontent.com', 'Google Client ID.'],
         }
 
         # Validate network list
