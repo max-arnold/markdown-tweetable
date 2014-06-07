@@ -28,7 +28,7 @@ into the following html markup
 
 TODO
 
-For Google+ you need to include the following JavaScript just before your </body> tag:
+For Google+ you need to include the following JavaScript just before your `</body>` tag:
 
     <script type="text/javascript">
       (function() {
