@@ -36,7 +36,6 @@ SNIPPET = '''<blockquote class="tweetable">
 <p class="tweetable-buttons">{buttons}</p>
 </blockquote>'''
 
-# https://developers.google.com/+/web/share/interactive
 GOOGLE = ('<a href="javascript:void(0)" class="g-interactivepost" '
           'data-clientid="{gcid}" '
           'data-cookiepolicy="single_host_origin" '
@@ -44,22 +43,12 @@ GOOGLE = ('<a href="javascript:void(0)" class="g-interactivepost" '
           'data-calltoactionurl="{url}" '
           'data-prefilltext="{headline}">Google+</a>')
 
-# <script type="text/javascript">
-#   (function() {
-#    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-#    po.src = 'https://apis.google.com/js/client:plusone.js';
-#    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-#  })();
-# </script>
-
 def create_google_button(url, headline, config):
     return GOOGLE.format(url=url,
                          headline=headline,
                          gcid=config['gcid'])
 
 
-# https://developers.facebook.com/docs/plugins/share-button/
-# http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-no-longer-accept-detailed-parameters
 FACEBOOK = '<a class="" title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_blank">Facebook</a>'
 
 def create_facebook_button(url, headline, config):
@@ -67,15 +56,16 @@ def create_facebook_button(url, headline, config):
                            headline=quote_plus(headline))
 
 
-# https://dev.twitter.com/docs/tweet-button
+# TODO: optional via
 TWITTER = '<a class="" title="Twitter" href="https://twitter.com/share?text={headline}&url={url}" target="_blank">Twitter</a>'
 
 def create_twitter_button(url, headline, config):
+    # TODO: validate length
+    # short_url_length_https: 23, short_url_length: 22, total_length: 140
     return TWITTER.format(url=quote_plus(url),
                           headline=quote_plus(headline))
 
 
-# http://vk.com/dev/share_details
 VKONTAKTE = '<a class="" title="VKontakte" href="https://vk.com/share.php?url={url}&title={headline}" target="_blank">VKontakte</a>'
 
 def create_vkontakte_button(url, headline, config):
@@ -104,8 +94,6 @@ class TweetablePattern(Pattern):
     def handleMatch(self, m):
         quote = m.group('quote').strip()
         buttons = create_buttons('http://example.com', quote, self.config)
-        # TODO: validate length
-        # short_url_length_https: 23, short_url_length: 22, total_length: 140
         snippet = self.config['snippet'].format(quote=quote, buttons=buttons)
         placeholder = self.markdown.htmlStash.store(snippet)
         return placeholder
