@@ -48,7 +48,7 @@ GOOGLE = ('<a href="javascript:void(0)" '
           'data-contenturl="{url}" '
           'data-calltoactionurl="{url}" '
           'data-prefilltext="{headline}">'
-          '<span class="{google_class}"></span>Google+</a>')
+          '<span class="{google_class}"></span></a>')
 
 def create_google_button(url, headline, config):
     return GOOGLE.format(url=url,
@@ -61,7 +61,7 @@ FACEBOOK = ('<a class="tweetable-button" '
             'title="Copy the text, then click to share on Facebook" '
             'href="https://www.facebook.com/sharer/sharer.php?u={url}" '
             'target="_blank">'
-            '<span class="{facebook_class}"></span>Facebook</a>')
+            '<span class="{facebook_class}"></span></a>')
 
 def create_facebook_button(url, headline, config):
     return FACEBOOK.format(url=quote_plus(url),
@@ -74,7 +74,7 @@ TWITTER = ('<a class="tweetable-button" '
            'title="Click to share on Twitter" '
            'href="https://twitter.com/share?text={headline}&url={url}" '
            'target="_blank">'
-           '<span class="{twitter_class}"></span>Twitter</a>')
+           '<span class="{twitter_class}"></span></a>')
 
 def create_twitter_button(url, headline, config):
     # TODO: validate length
@@ -88,7 +88,7 @@ VKONTAKTE = ('<a class="tweetable-button" '
              'title="Click to share on VKontakte" '
              'href="https://vk.com/share.php?url={url}&title={headline}" '
              'target="_blank">'
-             '<span class="{vkontakte_class}"></span>VKontakte</a>')
+             '<span class="{vkontakte_class}"></span></a>')
 
 def create_vkontakte_button(url, headline, config):
     return VKONTAKTE.format(url=quote_plus(url),
