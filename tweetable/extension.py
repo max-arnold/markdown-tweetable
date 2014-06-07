@@ -42,7 +42,7 @@ SNIPPET = '''<blockquote class="tweetable">
 
 GOOGLE = ('<a href="javascript:void(0)" '
           'title="Click to share on Google+" '
-          'class="g-interactivepost" '
+          'class="tweetable-button g-interactivepost" '
           'data-clientid="{gcid}" '
           'data-cookiepolicy="single_host_origin" '
           'data-contenturl="{url}" '
@@ -55,7 +55,10 @@ def create_google_button(url, headline, config):
                          gcid=config['gcid'])
 
 
-FACEBOOK = '<a class="" title="Copy the text, then click to share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u={url}" target="_blank">Facebook</a>'
+FACEBOOK = ('<a class="tweetable-button" '
+            'title="Copy the text, then click to share on Facebook" '
+            'href="https://www.facebook.com/sharer/sharer.php?u={url}" '
+            'target="_blank">Facebook</a>')
 
 def create_facebook_button(url, headline, config):
     return FACEBOOK.format(url=quote_plus(url),
@@ -63,7 +66,10 @@ def create_facebook_button(url, headline, config):
 
 
 # TODO: optional via
-TWITTER = '<a class="" title="Click to share on Twitter" href="https://twitter.com/share?text={headline}&url={url}" target="_blank">Twitter</a>'
+TWITTER = ('<a class="tweetable-button" '
+           'title="Click to share on Twitter" '
+           'href="https://twitter.com/share?text={headline}&url={url}" '
+           'target="_blank">Twitter</a>')
 
 def create_twitter_button(url, headline, config):
     # TODO: validate length
@@ -72,7 +78,10 @@ def create_twitter_button(url, headline, config):
                           headline=quote_plus(headline))
 
 
-VKONTAKTE = '<a class="" title="Click to share on VKontakte" href="https://vk.com/share.php?url={url}&title={headline}" target="_blank">VKontakte</a>'
+VKONTAKTE = ('<a class="tweetable-button" '
+             'title="Click to share on VKontakte" '
+             'href="https://vk.com/share.php?url={url}&title={headline}" '
+             'target="_blank">VKontakte</a>')
 
 def create_vkontakte_button(url, headline, config):
     return VKONTAKTE.format(url=quote_plus(url),
