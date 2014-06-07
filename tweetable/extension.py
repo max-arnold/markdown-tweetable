@@ -65,7 +65,7 @@ FACEBOOK = ('<a class="tweetable-button" '
 
 def create_facebook_button(url, headline, config):
     return FACEBOOK.format(url=quote_plus(url),
-                           headline=quote_plus(headline),
+                           headline=quote_plus(headline.encode('utf-8')),
                            facebook_class=config['facebook_class'])
 
 
@@ -80,7 +80,7 @@ def create_twitter_button(url, headline, config):
     # TODO: validate length
     # short_url_length_https: 23, short_url_length: 22, total_length: 140
     return TWITTER.format(url=quote_plus(url),
-                          headline=quote_plus(headline),
+                          headline=quote_plus(headline.encode('utf-8')),
                           twitter_class=config['twitter_class'])
 
 
@@ -92,7 +92,7 @@ VKONTAKTE = ('<a class="tweetable-button" '
 
 def create_vkontakte_button(url, headline, config):
     return VKONTAKTE.format(url=quote_plus(url),
-                            headline=quote_plus(headline),
+                            headline=quote_plus(headline.encode('utf-8')),
                             vkontakte_class=config['vkontakte_class'])
 
 
