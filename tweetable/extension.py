@@ -47,45 +47,53 @@ GOOGLE = ('<a href="javascript:void(0)" '
           'data-cookiepolicy="single_host_origin" '
           'data-contenturl="{url}" '
           'data-calltoactionurl="{url}" '
-          'data-prefilltext="{headline}">Google+</a>')
+          'data-prefilltext="{headline}">'
+          '<span class="{google_class}"></span>Google+</a>')
 
 def create_google_button(url, headline, config):
     return GOOGLE.format(url=url,
                          headline=headline,
-                         gcid=config['gcid'])
+                         gcid=config['gcid'],
+                         google_class=config['google_class'])
 
 
 FACEBOOK = ('<a class="tweetable-button" '
             'title="Copy the text, then click to share on Facebook" '
             'href="https://www.facebook.com/sharer/sharer.php?u={url}" '
-            'target="_blank">Facebook</a>')
+            'target="_blank">'
+            '<span class="{facebook_class}"></span>Facebook</a>')
 
 def create_facebook_button(url, headline, config):
     return FACEBOOK.format(url=quote_plus(url),
-                           headline=quote_plus(headline))
+                           headline=quote_plus(headline),
+                           facebook_class=config['facebook_class'])
 
 
 # TODO: optional via
 TWITTER = ('<a class="tweetable-button" '
            'title="Click to share on Twitter" '
            'href="https://twitter.com/share?text={headline}&url={url}" '
-           'target="_blank">Twitter</a>')
+           'target="_blank">'
+           '<span class="{twitter_class}"></span>Twitter</a>')
 
 def create_twitter_button(url, headline, config):
     # TODO: validate length
     # short_url_length_https: 23, short_url_length: 22, total_length: 140
     return TWITTER.format(url=quote_plus(url),
-                          headline=quote_plus(headline))
+                          headline=quote_plus(headline),
+                          twitter_class=config['twitter_class'])
 
 
 VKONTAKTE = ('<a class="tweetable-button" '
              'title="Click to share on VKontakte" '
              'href="https://vk.com/share.php?url={url}&title={headline}" '
-             'target="_blank">VKontakte</a>')
+             'target="_blank">'
+             '<span class="{vkontakte_class}"></span>VKontakte</a>')
 
 def create_vkontakte_button(url, headline, config):
     return VKONTAKTE.format(url=quote_plus(url),
-                            headline=quote_plus(headline))
+                            headline=quote_plus(headline),
+                            vkontakte_class=config['vkontakte_class'])
 
 
 BUTTONS = {
@@ -123,6 +131,10 @@ class TweetableExtension(Extension):
             'networks': [NETWORKS, 'Social networks for sharing.'],
             'snippet': [SNIPPET, 'HTML snippet.'],
             'gcid': ['xxxxx.apps.googleusercontent.com', 'Google Client ID.'],
+            'facebook_class': ['fa fa-facebook-square', 'Facebook button CSS class.'],
+            'google_class': ['fa fa-google-plus-square', 'Google+ button CSS class.'],
+            'twitter_class': ['fa fa-twitter-square', 'Twitter button CSS class.'],
+            'vkontakte_class': ['fa fa-vk', 'VKontakte button CSS class.'],
         }
 
         # Validate network list
