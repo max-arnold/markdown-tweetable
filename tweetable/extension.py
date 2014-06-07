@@ -37,12 +37,12 @@ SNIPPET = '''<blockquote class="tweetable">
 </blockquote>'''
 
 # https://developers.google.com/+/web/share/interactive
-GOOGLE = '''<span class="g-interactivepost"
-data-clientid="{gcid}"
-data-cookiepolicy="single_host_origin"
-data-contenturl="{url}"
-data-calltoactionurl="{url}"
-data-prefilltext="{headline}">Google+</span>'''
+GOOGLE = ('<a href="javascript:void(0)" class="g-interactivepost" '
+          'data-clientid="{gcid}" '
+          'data-cookiepolicy="single_host_origin" '
+          'data-contenturl="{url}" '
+          'data-calltoactionurl="{url}" '
+          'data-prefilltext="{headline}">Google+</a>')
 
 # <script type="text/javascript">
 #   (function() {
