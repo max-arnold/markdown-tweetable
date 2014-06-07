@@ -36,6 +36,7 @@ SNIPPET = '''<blockquote class="tweetable">
 <p class="tweetable-buttons">{buttons}</p>
 </blockquote>'''
 
+# TODO: allow to define shared url
 # TODO: button classes
 # TODO: button text localization
 
@@ -107,10 +108,6 @@ class TweetablePattern(Pattern):
 class TweetableExtension(Extension):
     def __init__(self, configs=()):
         configs = dict(configs) or {}
-
-        # TODO: button class customization
-        # TODO: google client id customization
-        # TODO: optional twitter CC
 
         # set extension defaults
         self.config = {
