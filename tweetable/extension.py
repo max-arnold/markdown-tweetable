@@ -174,6 +174,8 @@ class TweetableExtension(Extension):
         if diff:
             raise ValueError('Unsupported social network(s): {}'.format(', '.join(list(diff))))
 
+        # TODO: validate gcid if google is enabled
+
         networks = networks or NETWORKS
         self.setConfig('networks', networks)
 
