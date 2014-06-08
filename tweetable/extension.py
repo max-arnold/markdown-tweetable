@@ -55,7 +55,6 @@ SNIPPET = '''<blockquote class="tweetable">
 </blockquote>'''
 
 # TODO: find a way to get current page url if not specified
-# TODO: button classes
 # TODO: button text localization
 
 GOOGLE = ('<a href="javascript:void(0)" '
