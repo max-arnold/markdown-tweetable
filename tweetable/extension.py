@@ -27,9 +27,12 @@ from urllib import quote_plus
 from markdown.extensions import Extension
 from markdown.inlinepatterns import Pattern
 
+# TODO: alternative syntax
+# [tweetable alt="" url=""][/tweetable]
 TWEETABLE_RE = r'\[tweetable\](?P<quote>[^\[]+)\[/tweetable\](?:\((?P<url>[^\)]+)\))?'
 
-NETWORKS = ('google', 'facebook', 'twitter', 'vkontakte',)
+# TODO: email
+NETWORKS = ('twitter', 'google', 'facebook', 'vkontakte',)
 
 SNIPPET = '''<blockquote class="tweetable">
 <p>{quote}</p>
