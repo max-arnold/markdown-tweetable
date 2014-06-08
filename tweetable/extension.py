@@ -27,8 +27,7 @@ from urllib import quote_plus
 from markdown.extensions import Extension
 from markdown.inlinepatterns import Pattern
 
-# TODO: alternative syntax
-# [tweetable alt="" url=""][/tweetable]
+# TODO: alternative syntax: [tweetable alt="" url="" hashtags=""][/tweetable]
 TWEETABLE_RE = r'\[tweetable\](?P<quote>[^\[]+)\[/tweetable\](?:\((?P<url>[^\)]+)\))?'
 
 # TODO: email
