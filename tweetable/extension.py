@@ -23,12 +23,26 @@
 
 from __future__ import print_function, unicode_literals
 from urllib import quote_plus
+import re
 
 from markdown.extensions import Extension
 from markdown.inlinepatterns import Pattern
 
-# TODO: alternative syntax: [tweetable alt="" url="" hashtags=""][/tweetable]
-TWEETABLE_RE = r'\[tweetable\](?P<quote>[^\[]+)\[/tweetable\](?:\((?P<url>[^\)]+)\))?'
+TWEETABLE_RE = r'''
+\[tweetable
+  (?:\s+
+    (?:
+        alt=["'](?P<alt>[^"']+)["']
+      |
+        url=["'](?P<url>[^"']+)["']
+      |
+        hashtags=["'](?P<hashtags>[^"']+)["']
+    )
+  )*
+\]
+  (?P<quote>[^\[]+)
+\[/tweetable\]
+'''
 
 # TODO: email
 NETWORKS = ('twitter', 'google', 'facebook', 'vkontakte',)
@@ -49,12 +63,12 @@ GOOGLE = ('<a href="javascript:void(0)" '
           'data-cookiepolicy="single_host_origin" '
           'data-contenturl="{url}" '
           'data-calltoactionurl="{url}" '
-          'data-prefilltext="{headline}">'
+          'data-prefilltext="{quote}">'
           '<span class="{google_class}"></span></a>')
 
-def create_google_button(url, headline, config):
+def create_google_button(url, quote, hashtags, config):
     return GOOGLE.format(url=url,
-                         headline=headline,
+                         quote=quote,
                          gcid=config['gcid'],
                          google_class=config['google_class'])
 
@@ -65,36 +79,36 @@ FACEBOOK = ('<a class="tweetable-button" '
             'target="_blank">'
             '<span class="{facebook_class}"></span></a>')
 
-def create_facebook_button(url, headline, config):
+def create_facebook_button(url, quote, hashtags, config):
     return FACEBOOK.format(url=quote_plus(url),
-                           headline=quote_plus(headline.encode('utf-8')),
+                           quote=quote_plus(quote.encode('utf-8')),
                            facebook_class=config['facebook_class'])
 
 
 # TODO: optional via
 TWITTER = ('<a class="tweetable-button" '
            'title="Click to share on Twitter" '
-           'href="https://twitter.com/share?text={headline}&url={url}" '
+           'href="https://twitter.com/share?text={quote}&url={url}" '
            'target="_blank">'
            '<span class="{twitter_class}"></span></a>')
 
-def create_twitter_button(url, headline, config):
+def create_twitter_button(url, quote, hashtags, config):
     # TODO: validate length
     # short_url_length_https: 23, short_url_length: 22, total_length: 140
     return TWITTER.format(url=quote_plus(url),
-                          headline=quote_plus(headline.encode('utf-8')),
+                          quote=quote_plus(quote.encode('utf-8')),
                           twitter_class=config['twitter_class'])
 
 
 VKONTAKTE = ('<a class="tweetable-button" '
              'title="Click to share on VKontakte" '
-             'href="https://vk.com/share.php?url={url}&title={headline}" '
+             'href="https://vk.com/share.php?url={url}&title={quote}" '
              'target="_blank">'
              '<span class="{vkontakte_class}"></span></a>')
 
-def create_vkontakte_button(url, headline, config):
+def create_vkontakte_button(url, quote, hashtags, config):
     return VKONTAKTE.format(url=quote_plus(url),
-                            headline=quote_plus(headline.encode('utf-8')),
+                            quote=quote_plus(quote.encode('utf-8')),
                             vkontakte_class=config['vkontakte_class'])
 
 
@@ -105,22 +119,28 @@ BUTTONS = {
     'vkontakte': create_vkontakte_button,
 }
 
-def create_buttons(url, headline, config):
-    buttons = [BUTTONS[n](url, headline, config) for n in config['networks']]
+def create_buttons(url, quote, hashtags, config):
+    buttons = [BUTTONS[n](url, quote, hashtags, config) for n in config['networks']]
     return '\n'.join(buttons)
 
 
 class TweetablePattern(Pattern):
     """InlinePattern for tweetable quotes"""
     def __init__(self, pattern, config, markdown_instance=None):
-        super(TweetablePattern, self).__init__(pattern, markdown_instance=markdown_instance)
+        self.pattern = pattern
+        self.compiled_re = re.compile("^(.*?)%s(.*?)$" % pattern, re.DOTALL | re.UNICODE | re.VERBOSE)
+
+        # Api for Markdown to pass safe_mode into instance
+        self.safe_mode = False
+        if markdown_instance:
+            self.markdown = markdown_instance
+
         self.config = config
 
     def handleMatch(self, m):
-        quote = m.group('quote').strip()
-        url = m.group('url')
-        url = '' if url is None else url.strip()
-        buttons = create_buttons(url, quote, self.config)
+        quote, alt, url, hashtags = ['' if m.group(a) is None else m.group(a).strip() for a in ('quote', 'alt', 'url', 'hashtags')]
+        alt_quote = alt or quote
+        buttons = create_buttons(url, alt_quote, hashtags, self.config)
         snippet = self.config['snippet'].format(quote=quote, buttons=buttons)
         placeholder = self.markdown.htmlStash.store(snippet)
         return placeholder

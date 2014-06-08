@@ -4,11 +4,11 @@ Why this extension? A lot of blog posts have social sharing buttons at the top o
 
 With this extension you will be able to turn the text below
 
-    [tweetable]
+    [tweetable url="http://www.brainyquote.com/quotes/authors/v/vladimir_lenin.html"]
     When there is state there can be no freedom,
     but when there is freedom there will be no state.
     -- Vladimir Lenin
-    [/tweetable](http://www.brainyquote.com/quotes/authors/v/vladimir_lenin.html)
+    [/tweetable]
 
 into the following html markup
 
