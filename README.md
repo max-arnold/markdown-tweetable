@@ -55,7 +55,7 @@ If you plan to use Google+ button, you need to include the following JavaScript 
 
 Also you need oAuth 2.0 client ID, as described in the [documentation](https://developers.google.com/+/web/share/interactive#adding_the_share_button_to_your_page). To inject it, [specify](http://pythonhosted.org/Markdown/reference.html#extensions) `gcid` configuration parameter when initializing class instance:
 
-    MyExtension(configs={'gcid': ''xxxx.apps.googleusercontent.com'})
+    MyExtension(configs={'gcid': 'xxxx.apps.googleusercontent.com'})
 
 
 ## Configuration
