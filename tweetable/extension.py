@@ -38,11 +38,13 @@ TWEETABLE_RE = r'''
       |
         hashtags=["'](?P<hashtags>[^"']+)["']
     )
-  )*
+  \s*)*
 \]
   (?P<quote>[^\[]+)
 \[/tweetable\]
 '''
+
+HASHTAGS_RE = re.compile(r'^(?:(#\w+)(?:\s+(#\w+))*)?', re.UNICODE)
 
 # TODO: email
 NETWORKS = ('twitter', 'google', 'facebook', 'vkontakte',)
@@ -63,12 +65,13 @@ GOOGLE = ('<a href="javascript:void(0)" '
           'data-cookiepolicy="single_host_origin" '
           'data-contenturl="{url}" '
           'data-calltoactionurl="{url}" '
-          'data-prefilltext="{quote}">'
+          'data-prefilltext="{quote}{hashtags}">'
           '<span class="{google_class}"></span></a>')
 
 def create_google_button(url, quote, hashtags, config):
     return GOOGLE.format(url=url,
                          quote=quote,
+                         hashtags=format_hashtags(hashtags),
                          gcid=config['gcid'],
                          google_class=config['google_class'])
 
@@ -81,7 +84,7 @@ FACEBOOK = ('<a class="tweetable-button" '
 
 def create_facebook_button(url, quote, hashtags, config):
     return FACEBOOK.format(url=quote_plus(url),
-                           quote=quote_plus(quote.encode('utf-8')),
+                           quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
                            facebook_class=config['facebook_class'])
 
 
@@ -96,7 +99,7 @@ def create_twitter_button(url, quote, hashtags, config):
     # TODO: validate length
     # short_url_length_https: 23, short_url_length: 22, total_length: 140
     return TWITTER.format(url=quote_plus(url),
-                          quote=quote_plus(quote.encode('utf-8')),
+                          quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
                           twitter_class=config['twitter_class'])
 
 
@@ -108,7 +111,7 @@ VKONTAKTE = ('<a class="tweetable-button" '
 
 def create_vkontakte_button(url, quote, hashtags, config):
     return VKONTAKTE.format(url=quote_plus(url),
-                            quote=quote_plus(quote.encode('utf-8')),
+                            quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
                             vkontakte_class=config['vkontakte_class'])
 
 
@@ -122,6 +125,10 @@ BUTTONS = {
 def create_buttons(url, quote, hashtags, config):
     buttons = [BUTTONS[n](url, quote, hashtags, config) for n in config['networks']]
     return '\n'.join(buttons)
+
+
+def format_hashtags(hashtags, space=True):
+    return (' ' if space and hashtags else '') + ' '.join(hashtags)
 
 
 class TweetablePattern(Pattern):
@@ -140,6 +147,7 @@ class TweetablePattern(Pattern):
     def handleMatch(self, m):
         quote, alt, url, hashtags = ['' if m.group(a) is None else m.group(a).strip() for a in ('quote', 'alt', 'url', 'hashtags')]
         alt_quote = alt or quote
+        hashtags = [h for h in re.match(HASHTAGS_RE, hashtags).groups() if h is not None]
         buttons = create_buttons(url, alt_quote, hashtags, self.config)
         snippet = self.config['snippet'].format(quote=quote, buttons=buttons)
         placeholder = self.markdown.htmlStash.store(snippet)
