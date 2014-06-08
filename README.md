@@ -29,7 +29,8 @@ into the following html markup (TODO: screenshot, move actual markup to configur
 
 Full syntax:
 
-    [tweetable alt="When there is state there can be no freedom, but when there is freedom there will be no state"
+    [tweetable alt="When there is state there can be no freedom,
+                    but when there is freedom there will be no state"
                url="http://en.wikipedia.org/wiki/Vladimir_Lenin"
                hashtags="#lenin"]
     When there is state there can be no freedom, but when there is freedom there will be no state.
