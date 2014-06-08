@@ -87,6 +87,7 @@ NOTE: Facebook button sucks, because it [does not support](http://stackoverflow.
 
 * [Markdown 2.0+](http://pythonhosted.org/Markdown/)
 
+Default HTML snippet uses Twitter Bootstrap and Font Awesome, but you are free to change it and create your own markup and styles.
 
 ## Copyright
 
