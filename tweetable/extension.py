@@ -27,7 +27,7 @@ from urllib import quote_plus
 from markdown.extensions import Extension
 from markdown.inlinepatterns import Pattern
 
-TWEETABLE_RE = r'\[tweetable\](?P<quote>.+)\[/tweetable\]'
+TWEETABLE_RE = r'\[tweetable\](?P<quote>[^\[]+)\[/tweetable\](?:\((?P<url>[^\)]+)\))?'
 
 NETWORKS = ('google', 'facebook', 'twitter', 'vkontakte',)
 
@@ -36,7 +36,7 @@ SNIPPET = '''<blockquote class="tweetable">
 <p class="tweetable-buttons">{buttons}</p>
 </blockquote>'''
 
-# TODO: allow to define shared url
+# TODO: find a way to get current page url if not specified
 # TODO: button classes
 # TODO: button text localization
 
@@ -116,7 +116,9 @@ class TweetablePattern(Pattern):
 
     def handleMatch(self, m):
         quote = m.group('quote').strip()
-        buttons = create_buttons('http://example.com', quote, self.config)
+        url = m.group('url')
+        url = '' if url is None else url.strip()
+        buttons = create_buttons(url, quote, self.config)
         snippet = self.config['snippet'].format(quote=quote, buttons=buttons)
         placeholder = self.markdown.htmlStash.store(snippet)
         return placeholder
@@ -152,7 +154,7 @@ class TweetableExtension(Extension):
 
     def extendMarkdown(self, md, md_globals):
         tweetable_md_pattern = TweetablePattern(TWEETABLE_RE, self.getConfigs(), markdown_instance=md)
-        md.inlinePatterns.add('tweetable', tweetable_md_pattern, '_end')
+        md.inlinePatterns.add('tweetable', tweetable_md_pattern, '<link')
         md.registerExtension(self)
 
 
