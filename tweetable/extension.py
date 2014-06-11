@@ -147,6 +147,8 @@ class TweetablePattern(Pattern):
         quote, alt, url, hashtags = ['' if m.group(a) is None else m.group(a).strip() for a in ('quote', 'alt', 'url', 'hashtags')]
         alt_quote = alt or quote
         hashtags = [h for h in re.match(HASHTAGS_RE, hashtags).groups() if h is not None]
+        if not url.startswith('http'):
+            raise ValueError('Please specify url for tweetable quote.')
         buttons = create_buttons(url, alt_quote, hashtags, self.config)
         snippet = self.config['snippet'].format(quote=quote, buttons=buttons)
         placeholder = self.markdown.htmlStash.store(snippet)
