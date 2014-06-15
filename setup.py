@@ -5,6 +5,7 @@ setup(
     name='tweetable',
     version='1.0',
     maintainer="Max Arnold",
+    maintainer_email="arnold.maxim@gmail.com",
     url="https://github.com/max-arnold/markdown-tweetable",
     packages=['tweetable'],
     install_requires=['Markdown >= 2.0'],
