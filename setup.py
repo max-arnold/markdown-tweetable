@@ -7,10 +7,11 @@ setup(
     maintainer="Max Arnold",
     url="https://github.com/max-arnold/markdown-tweetable",
     packages=['tweetable'],
+    install_requires=['Markdown >= 2.0'],
     license='LICENSE.md',
     description='Tweetable quotes for Python-Markdown.',
-    keywords = ["markup", "markdown", "plugin", "quotes", "share", "tweet", "social"],
-    classifiers = [
+    keywords=["markup", "markdown", "plugin", "quotes", "share", "tweet", "social"],
+    classifiers=[
         "Programming Language :: Python",
         "Development Status :: 4 - Beta",
         "Environment :: Plugins",
