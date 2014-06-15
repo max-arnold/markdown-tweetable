@@ -52,6 +52,33 @@ Also you need oAuth 2.0 client ID, as described in the [documentation](https://d
     MyExtension(configs={'gcid': 'xxxx.apps.googleusercontent.com'})
 
 
+Also you probably want to add some style. Below is an example:
+
+    blockquote.tweetable {
+        border-top: 1px solid #CCC;
+        border-bottom: 1px solid #CCC;
+        border-left: none;
+        border-right: none;
+        position: relative;
+    }
+
+    blockquote.tweetable::before {
+        content: '“';
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 4em;
+        font-family: "inherit";
+        font-weight: bold;
+        color: #888;
+    }
+
+    blockquote.tweetable p {
+        margin: 0 0 0.5em 1.5em;
+        font-style: italic;
+    }
+
+
 ## Configuration
 
 TODO
