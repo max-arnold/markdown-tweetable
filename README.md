@@ -10,15 +10,9 @@ With this extension you will be able to turn the text below:
     -- Vladimir Lenin
     [/tweetable]
 
-into the following html markup (TODO: screenshot, move actual markup to configuration section)
+into the following nice styled quote:
 
-    <blockquote class="tweetable">
-    <p>When there is state there can be no freedom,
-    but when there is freedom there will be no state.
-    -- Vladimir Lenin</p>
-    <p class="tweetable-buttons">SOCIAL_SHARE_BUTTONS_CODE</p>
-    </blockquote>
-
+    ![Screenshot of the quote](/screenshot.png)
 
 ## Installation
 
@@ -77,6 +71,14 @@ List of configuration parameters:
     'google_class': ['fa fa-google-plus-square', 'Google+ button CSS class.'],
     'twitter_class': ['fa fa-twitter-square', 'Twitter button CSS class.'],
     'vkontakte_class': ['fa fa-vk', 'VKontakte button CSS class.'],
+
+
+    <blockquote class="tweetable">
+    <p>When there is state there can be no freedom,
+    but when there is freedom there will be no state.
+    -- Vladimir Lenin</p>
+    <p class="tweetable-buttons">SOCIAL_SHARE_BUTTONS_CODE</p>
+    </blockquote>
 
 
 ### Button docs:
