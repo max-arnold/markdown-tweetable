@@ -7,4 +7,5 @@
 *.egg-info
 dist/
 build/
+MANIFEST
 \.DS_Store
