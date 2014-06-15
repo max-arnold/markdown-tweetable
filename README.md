@@ -1,6 +1,6 @@
 # Tweetable quotes for Python-Markdown
 
-Why this extension? A lot of blog posts have social sharing buttons at the top or bottom of a page. But there is a recent trend to embed shareable quotes right into the post body, and this approach noticeably increases content sharing. Some sites even allow you to select any part of a text and share it (see [medium.com](https://medium.com/life-learning/7-reasons-why-you-will-never-do-anything-amazing-with-your-life-2a1841f1335d) for example). The basic idea is that people prefer to quote a story rather than its headline. And you can have multiple shareable quotes in a single story!
+Why this extension? A lot of blog posts have social sharing buttons at the top or bottom of a page. But there is a recent trend to embed shareable quotes right into the post body, which noticeably increases content sharing. Some sites even allow you to select any part of text and share it (see [medium.com](https://medium.com/life-learning/7-reasons-why-you-will-never-do-anything-amazing-with-your-life-2a1841f1335d) for example). The basic idea is that people prefer to quote a story rather than its headline. And you can have multiple shareable quotes in a single story!
 
 With this extension you will be able to turn the text below:
 
@@ -18,7 +18,7 @@ into the following nice styled quote:
 
     pip install markdown-tweetable
 
-Or:
+or:
 
     pip install git+git://github.com/max-arnold/markdown-tweetable.git
 
@@ -39,7 +39,7 @@ Default share buttons are rendered using [Font Awesome](http://fontawesome.io). 
 
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-There are also more advanced ways to use it, go read its [documentation](http://fontawesome.io/get-started/) if you are curious.
+There are also more advanced ways to use it, go read the [documentation](http://fontawesome.io/get-started/) if you are curious.
 
 If you plan to use Google+ button, you need to include the following JavaScript just before your `</body>` tag:
 
@@ -53,7 +53,7 @@ If you plan to use Google+ button, you need to include the following JavaScript 
 
 Also you need oAuth 2.0 client ID, as described in the [documentation](https://developers.google.com/+/web/share/interactive#adding_the_share_button_to_your_page). To inject it, [specify](http://pythonhosted.org/Markdown/reference.html#extensions) `gcid` configuration parameter when initializing class instance:
 
-    MyExtension(configs={'gcid': 'xxxx.apps.googleusercontent.com'})
+    TweetableExtension(configs={'gcid': 'xxxx.apps.googleusercontent.com'})
 
 
 Also you probably want to add some style. Below is an example:
