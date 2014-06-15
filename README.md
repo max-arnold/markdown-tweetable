@@ -139,4 +139,4 @@ Default HTML snippet uses Twitter Bootstrap and Font Awesome, but you are free t
 
 Copyright 2014 [Max Arnold](http://ar0.me/blog/en/), all rights reserved.
 
-This software is released under the BSD License.
+This software is released under the MIT License.
