@@ -72,12 +72,56 @@ List of configuration parameters:
     'twitter_class': ['fa fa-twitter-square', 'Twitter button CSS class.'],
     'vkontakte_class': ['fa fa-vk', 'VKontakte button CSS class.'],
 
+Default HTML snippet:
 
     <blockquote class="tweetable">
-    <p>When there is state there can be no freedom,
-    but when there is freedom there will be no state.
-    -- Vladimir Lenin</p>
-    <p class="tweetable-buttons">SOCIAL_SHARE_BUTTONS_CODE</p>
+      <p>{quote}</p>
+      <p class="tweetable-buttons">{buttons}</p>
+    </blockquote>
+
+Resulting HTML markup:
+
+    <blockquote class="tweetable">
+      <p>When there is state there can be no freedom,
+         but when there is freedom there will be no state.
+         -- Vladimir Lenin
+      </p>
+
+      <p class="tweetable-buttons">
+        <a class="tweetable-button"
+           title="Click to share on Twitter"
+           href="https://twitter.com/share?text=When+there+is+state+there+can+be+no+freedom%2C%0Abut+when+there+is+freedom+there+will+be+no+state.%0A--+Vladimir+Lenin&amp;url=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html"
+           target="_blank">
+          <span class="fa fa-twitter-square"></span>
+        </a>
+
+        <a href="javascript:void(0)"
+           title="Click to share on Google+"
+           class="tweetable-button g-interactivepost"
+           data-clientid="xxxx.apps.googleusercontent.com"
+           data-cookiepolicy="single_host_origin"
+           data-contenturl="http://www.brainyquote.com/quotes/authors/v/vladimir_lenin.html"
+           data-calltoactionurl="http://www.brainyquote.com/quotes/authors/v/vladimir_lenin.html"
+           data-prefilltext="When there is state there can be no freedom,
+                             but when there is freedom there will be no state.
+                             -- Vladimir Lenin">
+          <span class="fa fa-google-plus-square"></span>
+        </a>
+
+        <a class="tweetable-button"
+            title="Copy the text, then click to share on Facebook"
+            href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html"
+            target="_blank">
+          <span class="fa fa-facebook-square"></span>
+        </a>
+
+        <a class="tweetable-button"
+           title="Click to share on VKontakte"
+           href="https://vk.com/share.php?url=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html&amp;title=When+there+is+state+there+can+be+no+freedom%2C%0Abut+when+there+is+freedom+there+will+be+no+state.%0A--+Vladimir+Lenin"
+           target="_blank">
+          <span class="fa fa-vk"></span>
+        </a>
+      </p>
     </blockquote>
 
 
