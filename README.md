@@ -16,6 +16,10 @@ into the following nice styled quote:
 
 ## Installation
 
+    pip install markdown-tweetable
+
+Or:
+
     pip install git+git://github.com/max-arnold/markdown-tweetable.git
 
 
