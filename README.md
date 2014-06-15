@@ -52,12 +52,6 @@ Also you need oAuth 2.0 client ID, as described in the [documentation](https://d
     MyExtension(configs={'gcid': 'xxxx.apps.googleusercontent.com'})
 
 
-## How to use in popular blog engines
-
-### Nikola
-
-TODO: Describe how to use with [Nikola](http://getnikola.com/)
-
 ## Configuration
 
 TODO
