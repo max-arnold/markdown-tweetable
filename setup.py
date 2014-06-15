@@ -17,7 +17,7 @@ setup(
         "Development Status :: 4 - Beta",
         "Environment :: Plugins",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT LIcense",
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Text Processing :: Markup",
