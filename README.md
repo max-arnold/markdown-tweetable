@@ -12,7 +12,7 @@ With this extension you will be able to turn the text below:
 
 into the following nice styled quote:
 
-    ![Screenshot of the quote](/screenshot.png)
+![Screenshot of the quote](/screenshot.png)
 
 ## Installation
 
