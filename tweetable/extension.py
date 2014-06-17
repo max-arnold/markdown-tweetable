@@ -148,8 +148,12 @@ class TweetableExtension(Extension):
             'vkontakte_class': ['fa fa-vk', 'VKontakte button CSS class.'],
         }
 
+        # Accept not only list/tuple but also a string, with values separated by semicolon
+        networks = configs.pop('networks', '')
+        if not isinstance(networks, (list, tuple)):
+            networks = tuple(filter(None, networks.split(';')))
+
         # Validate network list
-        networks = tuple(filter(None, configs.pop('networks', '').split(';')))
         diff = set(networks).difference(set(NETWORKS))
         if diff:
             raise ValueError('Unsupported social network(s): {}'.format(', '.join(list(diff))))
