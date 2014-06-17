@@ -85,30 +85,30 @@ Also you probably want to add some style. Below is an example:
 
 ## List of configuration parameters
 
-### networks
+### Social buttons
 
 List of social networks for sharing. By default contains all supported networks:
 
-    ('twitter', 'google', 'facebook', 'vkontakte',)
+    networks=('twitter', 'google', 'facebook', 'vkontakte',)
 
 You can also specify it as a string (useful if you configured this markdown extension using module path with parameters):
 
-    twitter;google;facebook;vkontakte
+    networks='twitter;google;facebook;vkontakte'
 
-### snippet
+### HTML snippet
 
-HTML snippet to use. By default it looks like this:
+By default it looks like this:
 
-    <blockquote class="tweetable">
+    snippet='''<blockquote class="tweetable">
       <p>{quote}</p>
       <p class="tweetable-buttons">{buttons}</p>
-    </blockquote>
+    </blockquote>'''
 
-### gcid
+### Google Client ID
 
-Google Client ID. By default it is not valid:
+By default it is not valid:
 
-    xxxxx.apps.googleusercontent.com
+    gcid='xxxxx.apps.googleusercontent.com'
 
 ### Social button classes
 
