@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
     name='markdown-tweetable',
-    version='1.0',
+    version='1.01',
     maintainer="Max Arnold",
     maintainer_email="arnold.maxim@gmail.com",
     url="https://github.com/max-arnold/markdown-tweetable",
