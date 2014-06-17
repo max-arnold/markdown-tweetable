@@ -83,28 +83,44 @@ Also you probably want to add some style. Below is an example:
     }
 
 
-## Configuration
+## List of configuration parameters
 
-TODO
+### networks
 
-List of configuration parameters:
+List of social networks for sharing. By default contains all supported networks:
 
-    'networks': [NETWORKS, 'Social networks for sharing.'],
-    'snippet': [SNIPPET, 'HTML snippet.'],
-    'gcid': ['xxxxx.apps.googleusercontent.com', 'Google Client ID.'],
-    'facebook_class': ['fa fa-facebook-square', 'Facebook button CSS class.'],
-    'google_class': ['fa fa-google-plus-square', 'Google+ button CSS class.'],
-    'twitter_class': ['fa fa-twitter-square', 'Twitter button CSS class.'],
-    'vkontakte_class': ['fa fa-vk', 'VKontakte button CSS class.'],
+    ('twitter', 'google', 'facebook', 'vkontakte',)
 
-Default HTML snippet:
+You can also specify it as a string (useful if you configured this markdown extension using module path with parameters):
+
+    twitter;google;facebook;vkontakte
+
+### snippet
+
+HTML snippet to use. By default it looks like this:
 
     <blockquote class="tweetable">
       <p>{quote}</p>
       <p class="tweetable-buttons">{buttons}</p>
     </blockquote>
 
-Resulting HTML markup:
+### gcid
+
+Google Client ID. By default it is not valid:
+
+    xxxxx.apps.googleusercontent.com
+
+### Social button classes
+
+Useful for customizing button's CSS:
+
+    facebook_class='fa fa-facebook-square'
+    google_class='fa fa-google-plus-square'
+    twitter_class='fa fa-twitter-square'
+    vkontakte_class='fa fa-vk'
+
+
+Given all these configuration options, the resulting HTML markup would look like this:
 
     <blockquote class="tweetable">
       <p>When there is state there can be no freedom,
