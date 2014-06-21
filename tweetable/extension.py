@@ -25,7 +25,7 @@ TWEETABLE_RE = r'''
 HASHTAGS_RE = re.compile(r'^(?:(#\w+)(?:\s+(#\w+))*)?', re.UNICODE)
 
 # TODO: email
-NETWORKS = ('twitter', 'google', 'facebook', 'vkontakte',)
+NETWORKS = ('twitter', 'google', 'facebook', 'linkedin', 'vkontakte',)
 
 SNIPPET = '''<blockquote class="tweetable">
 <p>{quote}</p>
@@ -65,6 +65,18 @@ def create_facebook_button(url, quote, hashtags, config):
                            facebook_class=config['facebook_class'])
 
 
+LINKEDIN = ('<a class="tweetable-button" '
+            'title="Click to share on LinkedIn" '
+            'href="http://www.linkedin.com/shareArticle?mini=true&url={url}&title={quote}" '
+            'target="_blank">'
+            '<span class="{linkedin_class}"></span></a>')
+
+def create_linkedin_button(url, quote, hashtags, config):
+    return LINKEDIN.format(url=quote_plus(url),
+                           quote=quote_plus(quote.encode('utf-8')),
+                           linkedin_class=config['linkedin_class'])
+
+
 # TODO: optional via
 TWITTER = ('<a class="tweetable-button" '
            'title="Click to share on Twitter" '
@@ -80,6 +92,7 @@ def create_twitter_button(url, quote, hashtags, config):
                           twitter_class=config['twitter_class'])
 
 
+# TODO: optional source
 VKONTAKTE = ('<a class="tweetable-button" '
              'title="Click to share on VKontakte" '
              'href="https://vk.com/share.php?url={url}&title={quote}" '
@@ -95,6 +108,7 @@ def create_vkontakte_button(url, quote, hashtags, config):
 BUTTONS = {
     'google': create_google_button,
     'facebook': create_facebook_button,
+    'linkedin': create_linkedin_button,
     'twitter': create_twitter_button,
     'vkontakte': create_vkontakte_button,
 }
@@ -144,6 +158,7 @@ class TweetableExtension(Extension):
             'gcid': ['xxxxx.apps.googleusercontent.com', 'Google Client ID.'],
             'facebook_class': ['fa fa-facebook-square', 'Facebook button CSS class.'],
             'google_class': ['fa fa-google-plus-square', 'Google+ button CSS class.'],
+            'linkedin_class': ['fa fa-linkedin-square', 'LinkedIn button CSS class.'],
             'twitter_class': ['fa fa-twitter-square', 'Twitter button CSS class.'],
             'vkontakte_class': ['fa fa-vk', 'VKontakte button CSS class.'],
         }

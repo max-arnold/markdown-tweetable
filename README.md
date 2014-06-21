@@ -89,11 +89,11 @@ Also you probably want to add some style. Below is an example:
 
 List of social networks for sharing. By default contains all supported networks:
 
-    networks=('twitter', 'google', 'facebook', 'vkontakte',)
+    networks=('twitter', 'google', 'facebook', 'linkedin', 'vkontakte',)
 
 You can also specify it as a string (useful if you configured this markdown extension using module path with parameters):
 
-    networks='twitter;google;facebook;vkontakte'
+    networks='twitter;google;facebook;linkedin;vkontakte'
 
 ### HTML snippet
 
@@ -116,6 +116,7 @@ Useful for customizing button's CSS:
 
     facebook_class='fa fa-facebook-square'
     google_class='fa fa-google-plus-square'
+    linkedin_class='fa fa-linkedin-square'
     twitter_class='fa fa-twitter-square'
     vkontakte_class='fa fa-vk'
 
@@ -170,11 +171,14 @@ Given all these configuration options, the resulting HTML markup would look like
 
 * https://developers.facebook.com/docs/plugins/share-button/
 * https://developers.google.com/+/web/share/interactive
+* http://developer.linkedin.com/documents/share-linkedin
 * https://dev.twitter.com/docs/tweet-button
 * http://vk.com/dev/share_details
 
-NOTE: Facebook button sucks, because it [does not support](http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-no-longer-accept-detailed-parameters) prefilled text.
+NOTES:
 
+* Facebook button sucks, because it [does not support](http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-no-longer-accept-detailed-parameters) prefilled text.
+* LinkedIn [does not support](http://help.linkedin.com/app/answers/detail/a_id/5028/~/linkedin-signal---no-longer-supported) hashtags.
 
 ## Dependencies
 
