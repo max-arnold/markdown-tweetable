@@ -158,6 +158,13 @@ Given all these configuration options, the resulting HTML markup would look like
         </a>
 
         <a class="tweetable-button"
+            title="Click to share on LinkedIn"
+            href="href="http://www.linkedin.com/shareArticle?mini=true&url={http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html}&title={When+there+is+state+there+can+be+no+freedom%2C%0Abut+when+there+is+freedom+there+will+be+no+state.%0A--+Vladimir+Lenin}"
+            target="_blank">
+          <span class="fa fa-linkedin-square"></span>
+        </a>
+
+        <a class="tweetable-button"
            title="Click to share on VKontakte"
            href="https://vk.com/share.php?url=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html&amp;title=When+there+is+state+there+can+be+no+freedom%2C%0Abut+when+there+is+freedom+there+will+be+no+state.%0A--+Vladimir+Lenin"
            target="_blank">
