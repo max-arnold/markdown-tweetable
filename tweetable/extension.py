@@ -35,74 +35,79 @@ SNIPPET = '''<blockquote class="tweetable">
 # TODO: find a way to get current page url if not specified
 # TODO: button text localization
 
-GOOGLE = ('<a href="javascript:void(0)" '
-          'title="Click to share on Google+" '
-          'class="tweetable-button g-interactivepost" '
-          'data-clientid="{gcid}" '
-          'data-cookiepolicy="single_host_origin" '
-          'data-contenturl="{url}" '
-          'data-calltoactionurl="{url}" '
-          'data-prefilltext="{quote}{hashtags}">'
-          '<span class="{google_class}"></span></a>')
+SNIPPET_GOOGLE = ('<a href="javascript:void(0)" '
+                  'title="Click to share on Google+" '
+                  'class="tweetable-button g-interactivepost" '
+                  'data-clientid="{gcid}" '
+                  'data-cookiepolicy="single_host_origin" '
+                  'data-contenturl="{url}" '
+                  'data-calltoactionurl="{url}" '
+                  'data-prefilltext="{quote}{hashtags}">'
+                  '<span class="{css_google}"></span></a>')
 
 def create_google_button(url, quote, hashtags, config):
-    return GOOGLE.format(url=url,
-                         quote=quote,
-                         hashtags=format_hashtags(hashtags),
-                         gcid=config['gcid'],
-                         google_class=config['google_class'])
+    return config['snippet_google'].format(url=url,
+                                    urlq=quote_plus(url),
+                                    quote=quote,
+                                    hashtags=format_hashtags(hashtags),
+                                    gcid=config['gcid'],
+                                    css_google=config['css_google'])
 
 
-FACEBOOK = ('<a class="tweetable-button" '
-            'title="Copy the text, then click to share on Facebook" '
-            'href="https://www.facebook.com/sharer/sharer.php?u={url}" '
-            'target="_blank">'
-            '<span class="{facebook_class}"></span></a>')
+SNIPPET_FACEBOOK = ('<a class="tweetable-button" '
+                    'title="Copy the text, then click to share on Facebook" '
+                    'href="https://www.facebook.com/sharer/sharer.php?u={urlq}" '
+                    'target="_blank">'
+                    '<span class="{css_facebook}"></span></a>')
 
 def create_facebook_button(url, quote, hashtags, config):
-    return FACEBOOK.format(url=quote_plus(url),
-                           quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
-                           facebook_class=config['facebook_class'])
+    return config['snippet_facebook'].format(url=url,
+                                      urlq=quote_plus(url),
+                                      quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
+                                      css_facebook=config['css_facebook'])
 
 
-LINKEDIN = ('<a class="tweetable-button" '
-            'title="Click to share on LinkedIn" '
-            'href="http://www.linkedin.com/shareArticle?mini=true&url={url}&title={quote}" '
-            'target="_blank">'
-            '<span class="{linkedin_class}"></span></a>')
+SNIPPET_LINKEDIN = ('<a class="tweetable-button" '
+                    'title="Click to share on LinkedIn" '
+                    'href="http://www.linkedin.com/shareArticle?mini=true&url={urlq}&title={quote}" '
+                    'target="_blank">'
+                    '<span class="{css_linkedin}"></span></a>')
 
 def create_linkedin_button(url, quote, hashtags, config):
-    return LINKEDIN.format(url=quote_plus(url),
-                           quote=quote_plus(quote.encode('utf-8')),
-                           linkedin_class=config['linkedin_class'])
+    return config['snippet_linkedin'].format(url=url,
+                                      urlq=quote_plus(url),
+                                      quote=quote_plus(quote.encode('utf-8')),
+                                      css_linkedin=config['css_linkedin'])
 
 
 # TODO: optional via
-TWITTER = ('<a class="tweetable-button" '
-           'title="Click to share on Twitter" '
-           'href="https://twitter.com/share?text={quote}&url={url}" '
-           'target="_blank">'
-           '<span class="{twitter_class}"></span></a>')
+SNIPPET_TWITTER = ('<a class="tweetable-button" '
+                   'title="Click to share on Twitter" '
+                   'href="https://twitter.com/share?text={quote}&url={urlq}" '
+                   'target="_blank">'
+                   '<span class="{css_twitter}"></span></a>')
 
 def create_twitter_button(url, quote, hashtags, config):
     # TODO: validate length
     # short_url_length_https: 23, short_url_length: 22, total_length: 140
-    return TWITTER.format(url=quote_plus(url),
-                          quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
-                          twitter_class=config['twitter_class'])
+    return config['snippet_twitter'].format(url=url,
+                                     urlq=quote_plus(url),
+                                     quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
+                                     css_twitter=config['css_twitter'])
 
 
 # TODO: optional source
-VKONTAKTE = ('<a class="tweetable-button" '
-             'title="Click to share on VKontakte" '
-             'href="https://vk.com/share.php?url={url}&title={quote}" '
-             'target="_blank">'
-             '<span class="{vkontakte_class}"></span></a>')
+SNIPPET_VKONTAKTE = ('<a class="tweetable-button" '
+                     'title="Click to share on VKontakte" '
+                     'href="https://vk.com/share.php?url={urlq}&title={quote}" '
+                     'target="_blank">'
+                     '<span class="{css_vkontakte}"></span></a>')
 
 def create_vkontakte_button(url, quote, hashtags, config):
-    return VKONTAKTE.format(url=quote_plus(url),
-                            quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
-                            vkontakte_class=config['vkontakte_class'])
+    return config['snippet_vkontakte'].format(url=url,
+                                       urlq=quote_plus(url),
+                                       quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
+                                       css_vkontakte=config['css_vkontakte'])
 
 
 BUTTONS = {
@@ -155,12 +160,22 @@ class TweetableExtension(Extension):
         self.config = {
             'networks': [NETWORKS, 'Social networks for sharing.'],
             'snippet': [SNIPPET, 'HTML snippet.'],
+
+            'snippet_facebook': [SNIPPET_FACEBOOK, 'Facebook HTML snippet.'],
+            'css_facebook': ['fa fa-facebook-square', 'Facebook button CSS class.'],
+
+            'snippet_google': [SNIPPET_GOOGLE, 'Google+ HTML snippet.'],
+            'css_google': ['fa fa-google-plus-square', 'Google+ button CSS class.'],
             'gcid': ['xxxxx.apps.googleusercontent.com', 'Google Client ID.'],
-            'facebook_class': ['fa fa-facebook-square', 'Facebook button CSS class.'],
-            'google_class': ['fa fa-google-plus-square', 'Google+ button CSS class.'],
-            'linkedin_class': ['fa fa-linkedin-square', 'LinkedIn button CSS class.'],
-            'twitter_class': ['fa fa-twitter-square', 'Twitter button CSS class.'],
-            'vkontakte_class': ['fa fa-vk', 'VKontakte button CSS class.'],
+
+            'snippet_linkedin': [SNIPPET_LINKEDIN, 'LinkedIn HTML snippet.'],
+            'css_linkedin': ['fa fa-linkedin-square', 'LinkedIn button CSS class.'],
+
+            'snippet_twitter': [SNIPPET_TWITTER, 'Twitter HTML snippet.'],
+            'css_twitter': ['fa fa-twitter-square', 'Twitter button CSS class.'],
+
+            'snippet_vkontakte': [SNIPPET_VKONTAKTE, 'VKontakte HTML snippet.'],
+            'css_vkontakte': ['fa fa-vk', 'VKontakte button CSS class.'],
         }
 
         # Accept not only list/tuple but also a string, with values separated by semicolon

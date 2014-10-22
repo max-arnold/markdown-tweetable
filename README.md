@@ -56,7 +56,7 @@ Also you need oAuth 2.0 client ID, as described in the [documentation](https://d
     TweetableExtension(configs={'gcid': 'xxxx.apps.googleusercontent.com'})
 
 
-Also you probably want to add some style. Below is an example:
+And you probably want to add some style. Below is an example:
 
     blockquote.tweetable {
         border-top: 1px solid #CCC;
@@ -100,26 +100,61 @@ You can also specify it as a string (useful if you configured this markdown exte
 By default it looks like this:
 
     snippet='''<blockquote class="tweetable">
-      <p>{quote}</p>
-      <p class="tweetable-buttons">{buttons}</p>
+        <p>{quote}</p>
+        <p class="tweetable-buttons">{buttons}</p>
     </blockquote>'''
+
+### Social button snippets
+
+    snippet_google='''<a href="javascript:void(0)"
+        title="Click to share on Google+"
+        class="tweetable-button g-interactivepost"
+        data-clientid="{gcid}"
+        data-cookiepolicy="single_host_origin"
+        data-contenturl="{url}"
+        data-calltoactionurl="{url}"
+        data-prefilltext="{quote}{hashtags}">
+        <span class="{css_google}"></span></a>'''
+
+    snippet_facebook='''<a class="tweetable-button"
+        title="Copy the text, then click to share on Facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u={urlq}"
+        target="_blank">
+        <span class="{css_facebook}"></span></a>
+
+    snippet_linkedin='''<a class="tweetable-button"
+        title="Click to share on LinkedIn"
+        href="http://www.linkedin.com/shareArticle?mini=true&url={urlq}&title={quote}"
+        target="_blank">
+        <span class="{css_linkedin}"></span></a>
+
+    snippet_twitter='''<a class="tweetable-button"
+        title="Click to share on Twitter"
+        href="https://twitter.com/share?text={quote}&url={urlq}"
+        target="_blank">
+        <span class="{css_twitter}"></span></a>
+
+    snippet_vkontakte='''<a class="tweetable-button"
+        title="Click to share on VKontakte"
+        href="https://vk.com/share.php?url={urlq}&title={quote}"
+        target="_blank">
+        <span class="{css_vkontakte}"></span></a>
+
+### Social button classes
+
+Useful for customizing button CSS:
+
+    css_facebook='fa fa-facebook-square'
+    css_google='fa fa-google-plus-square'
+    css_linkedin='fa fa-linkedin-square'
+    css_twitter='fa fa-twitter-square'
+    css_vkontakte='fa fa-vk'
 
 ### Google Client ID
 
 By default it is not valid:
 
     gcid='xxxxx.apps.googleusercontent.com'
-
-### Social button classes
-
-Useful for customizing button's CSS:
-
-    facebook_class='fa fa-facebook-square'
-    google_class='fa fa-google-plus-square'
-    linkedin_class='fa fa-linkedin-square'
-    twitter_class='fa fa-twitter-square'
-    vkontakte_class='fa fa-vk'
-
 
 Given all these configuration options, the resulting HTML markup would look like this:
 
