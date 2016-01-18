@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, unicode_literals
-from urllib import quote_plus
 import re
+
+try:
+    from urllib.parse import quote_plus
+except ImportError:
+    from urllib import quote_plus
 
 from markdown.extensions import Extension
 from markdown.inlinepatterns import Pattern

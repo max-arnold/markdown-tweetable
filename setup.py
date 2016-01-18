@@ -3,12 +3,12 @@ from distutils.core import setup
 
 setup(
     name='markdown-tweetable',
-    version='1.2.0',
+    version='1.2.1',
     maintainer="Max Arnold",
     maintainer_email="arnold.maxim@gmail.com",
     url="https://github.com/max-arnold/markdown-tweetable",
     packages=['tweetable'],
-    install_requires=['Markdown >= 2.0'],
+    install_requires=['Markdown >= 2.6'],
     license='LICENSE.md',
     description='Tweetable quotes for Python-Markdown.',
     keywords=["markup", "markdown", "plugin", "quotes", "share", "tweet", "social"],
