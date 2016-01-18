@@ -153,9 +153,7 @@ class TweetablePattern(Pattern):
 
 
 class TweetableExtension(Extension):
-    def __init__(self, configs=()):
-        configs = dict(configs) or {}
-
+    def __init__(self, *args, **kwargs):
         # set extension defaults
         self.config = {
             'networks': [NETWORKS, 'Social networks for sharing.'],
@@ -179,7 +177,7 @@ class TweetableExtension(Extension):
         }
 
         # Accept not only list/tuple but also a string, with values separated by semicolon
-        networks = configs.pop('networks', '')
+        networks = kwargs.pop('networks', '')
         if not isinstance(networks, (list, tuple)):
             networks = tuple(filter(None, networks.split(';')))
 
@@ -193,9 +191,7 @@ class TweetableExtension(Extension):
         networks = networks or NETWORKS
         self.setConfig('networks', networks)
 
-        # Override defaults with user settings
-        for key, value in configs.items():
-            self.setConfig(key, value)
+        self.setConfigs(kwargs)
 
     def extendMarkdown(self, md, md_globals):
         tweetable_md_pattern = TweetablePattern(TWEETABLE_RE, self.getConfigs(), markdown_instance=md)
@@ -203,11 +199,5 @@ class TweetableExtension(Extension):
         md.registerExtension(self)
 
 
-def makeExtension(configs=None):
-    return TweetableExtension(configs=configs)
-
-
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod(optionflags=(doctest.NORMALIZE_WHITESPACE +
-                                 doctest.REPORT_NDIFF))
+def makeExtension(*args, **kwargs):
+    return TweetableExtension(*args, **kwargs)
