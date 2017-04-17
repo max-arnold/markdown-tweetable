@@ -130,7 +130,7 @@ By default it looks like this:
 
     snippet_twitter='''<a class="tweetable-button"
         title="Click to share on Twitter"
-        href="https://twitter.com/share?text={quote}&url={urlq}"
+        href="https://twitter.com/intent/tweet?text={quote}&url={urlq}&hashtags={hashtags}"
         target="_blank">
         <span class="{css_twitter}"></span></a>
 
@@ -167,7 +167,7 @@ Given all these configuration options, the resulting HTML markup would look like
       <p class="tweetable-buttons">
         <a class="tweetable-button"
            title="Click to share on Twitter"
-           href="https://twitter.com/share?text=When+there+is+state+there+can+be+no+freedom%2C%0Abut+when+there+is+freedom+there+will+be+no+state.%0A--+Vladimir+Lenin&amp;url=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html"
+           href="https://twitter.com/intent/tweet?text=When+there+is+state+there+can+be+no+freedom%2C%0Abut+when+there+is+freedom+there+will+be+no+state.%0A--+Vladimir+Lenin&amp;url=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html&amp;hashtags="
            target="_blank">
           <span class="fa fa-twitter-square"></span>
         </a>

@@ -87,7 +87,7 @@ def create_linkedin_button(url, quote, hashtags, config):
 # TODO: optional via
 SNIPPET_TWITTER = ('<a class="tweetable-button" '
                    'title="Click to share on Twitter" '
-                   'href="https://twitter.com/share?text={quote}&url={urlq}" '
+                   'href="https://twitter.com/intent/tweet?text={quote}&url={urlq}&hashtags={hashtags}" '
                    'target="_blank">'
                    '<span class="{css_twitter}"></span></a>')
 
@@ -96,7 +96,8 @@ def create_twitter_button(url, quote, hashtags, config):
     # short_url_length_https: 23, short_url_length: 22, total_length: 140
     return config['snippet_twitter'].format(url=url,
                                      urlq=quote_plus(url),
-                                     quote=quote_plus((quote + format_hashtags(hashtags)).encode('utf-8')),
+                                     quote=quote_plus(quote.encode('utf-8')),
+                                     hashtags=format_hashtags(hashtags, separator=',', strip_hash=True)
                                      css_twitter=config['css_twitter'])
 
 
@@ -127,8 +128,8 @@ def create_buttons(url, quote, hashtags, config):
     return '\n'.join(buttons)
 
 
-def format_hashtags(hashtags, space=True):
-    return (' ' if space and hashtags else '') + ' '.join(hashtags)
+def format_hashtags(hashtags, separator=' ', strip_hash=False):
+    return separator.join(hashtags).replace('#' if strip_hash else '', '')
 
 
 class TweetablePattern(Pattern):
