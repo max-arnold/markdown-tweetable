@@ -228,6 +228,10 @@ NOTES:
 
 Default HTML snippet uses Twitter Bootstrap and Font Awesome, but you are free to change it and create your own markup and style.
 
+## TODO
+
+Replace font-awesome with these SVG icons: https://github.com/edent/SuperTinySocialIcons/
+
 ## Copyright
 
 Copyright 2014 [Max Arnold](http://ar0.me/blog/en/), all rights reserved.
