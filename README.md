@@ -35,12 +35,6 @@ Full syntax:
     -- Vladimir Lenin
     [/tweetable]
 
-Default share buttons are rendered using [Font Awesome](http://fontawesome.io). To use it you need to include the following CSS file before your `</head>` tag:
-
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
-There are also more advanced ways to use it, go read the [documentation](http://fontawesome.io/get-started/) if you are curious.
-
 If you plan to use Google+ button, you need to include the following JavaScript just before your `</body>` tag:
 
     <script type="text/javascript">
@@ -56,7 +50,7 @@ Also you need oAuth 2.0 client ID, as described in the [documentation](https://d
     TweetableExtension(configs={'gcid': 'xxxx.apps.googleusercontent.com'})
 
 
-And you probably want to add some style. Below is an example:
+And you definitely want to add some style. Below is an example:
 
     blockquote.tweetable {
         border-top: 1px solid #CCC;
@@ -82,6 +76,10 @@ And you probably want to add some style. Below is an example:
         font-style: italic;
     }
 
+    .tweetable-svg-icon {
+        /* fill: #db3535; */
+        width: 1em;
+    }
 
 ## List of configuration parameters
 
@@ -114,47 +112,62 @@ By default it looks like this:
         data-contenturl="{url}"
         data-calltoactionurl="{url}"
         data-prefilltext="{quote}{hashtags}">
-        <span class="{css_google}"></span></a>'''
+        {icon_google}</a>'''
 
     snippet_facebook='''<a class="tweetable-button"
         title="Copy the text, then click to share on Facebook"
         href="https://www.facebook.com/sharer/sharer.php?u={urlq}"
         target="_blank">
-        <span class="{css_facebook}"></span></a>
+        {icon_facebook}</a>'''
 
     snippet_linkedin='''<a class="tweetable-button"
         title="Click to share on LinkedIn"
         href="http://www.linkedin.com/shareArticle?mini=true&url={urlq}&title={quote}"
         target="_blank">
-        <span class="{css_linkedin}"></span></a>
+        {icon_linkedin}</a>'''
 
     snippet_twitter='''<a class="tweetable-button"
         title="Click to share on Twitter"
         href="https://twitter.com/intent/tweet?text={quote}&url={urlq}&hashtags={hashtags}"
         target="_blank">
-        <span class="{css_twitter}"></span></a>
+        {icon_twitter}</a>'''
 
     snippet_vkontakte='''<a class="tweetable-button"
         title="Click to share on VKontakte"
         href="https://vk.com/share.php?url={urlq}&title={quote}"
         target="_blank">
-        <span class="{css_vkontakte}"></span></a>
-
-### Social button classes
-
-Useful for customizing button CSS:
-
-    css_facebook='fa fa-facebook-square'
-    css_google='fa fa-google-plus-square'
-    css_linkedin='fa fa-linkedin-square'
-    css_twitter='fa fa-twitter-square'
-    css_vkontakte='fa fa-vk'
+        {icon_vkontakte}</a>'''
 
 ### Google Client ID
 
 By default it is not valid:
 
     gcid='xxxxx.apps.googleusercontent.com'
+
+### Social icons
+
+    icon_facebook='''
+        <svg role="img" class="tweetable-svg-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <rect fill="#3b5998" height="512" rx="15%" width="512"/>
+        <path d="m287 456v-299c0-21 6-35 35-35h38v-63c-7-1-29-3-55-3-54 0-91 33-91 94v306m143-254h-205v72h196" fill="#fff"/>
+        </svg>'''
+
+    icon_google='''
+        ...
+    '''
+
+    icon_linkedin='''
+        ...
+    '''
+
+    icon_twitter='''
+        ...
+    '''
+
+    icon_vkontakte='''
+        ...
+    '''
+
 
 Given all these configuration options, the resulting HTML markup would look like this:
 
@@ -169,7 +182,7 @@ Given all these configuration options, the resulting HTML markup would look like
            title="Click to share on Twitter"
            href="https://twitter.com/intent/tweet?text=When+there+is+state+there+can+be+no+freedom%2C%0Abut+when+there+is+freedom+there+will+be+no+state.%0A--+Vladimir+Lenin&amp;url=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html&amp;hashtags="
            target="_blank">
-          <span class="fa fa-twitter-square"></span>
+          <svg>Twitter icon here...</svg>
         </a>
 
         <a href="javascript:void(0)"
@@ -182,28 +195,28 @@ Given all these configuration options, the resulting HTML markup would look like
            data-prefilltext="When there is state there can be no freedom,
                              but when there is freedom there will be no state.
                              -- Vladimir Lenin">
-          <span class="fa fa-google-plus-square"></span>
+          <svg>Google+ icon here...</svg>
         </a>
 
         <a class="tweetable-button"
             title="Copy the text, then click to share on Facebook"
             href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html"
             target="_blank">
-          <span class="fa fa-facebook-square"></span>
+          <svg>Facebook icon here...</svg>
         </a>
 
         <a class="tweetable-button"
             title="Click to share on LinkedIn"
             href="href="http://www.linkedin.com/shareArticle?mini=true&url={http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html}&title={When+there+is+state+there+can+be+no+freedom%2C%0Abut+when+there+is+freedom+there+will+be+no+state.%0A--+Vladimir+Lenin}"
             target="_blank">
-          <span class="fa fa-linkedin-square"></span>
+          <svg>LinkedIn icon here...</svg>
         </a>
 
         <a class="tweetable-button"
            title="Click to share on VKontakte"
            href="https://vk.com/share.php?url=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html&amp;title=When+there+is+state+there+can+be+no+freedom%2C%0Abut+when+there+is+freedom+there+will+be+no+state.%0A--+Vladimir+Lenin"
            target="_blank">
-          <span class="fa fa-vk"></span>
+          <svg>VKontakte icon here...</svg>
         </a>
       </p>
     </blockquote>
@@ -222,18 +235,16 @@ NOTES:
 * Facebook button sucks, because it [does not support](http://stackoverflow.com/questions/20956229/has-facebook-sharer-php-changed-to-no-longer-accept-detailed-parameters) prefilled text.
 * LinkedIn [does not support](http://help.linkedin.com/app/answers/detail/a_id/5028/~/linkedin-signal---no-longer-supported) hashtags.
 
+### SVG Icons
+
+Default share buttons are rendered using [Super Tiny Social Icons](https://github.com/edent/SuperTinySocialIcons).
+
 ## Dependencies
 
 * [Markdown 2.6+](http://pythonhosted.org/Markdown/)
 
-Default HTML snippet uses Twitter Bootstrap and Font Awesome, but you are free to change it and create your own markup and style.
-
-## TODO
-
-Replace font-awesome with these SVG icons: https://github.com/edent/SuperTinySocialIcons/
-
 ## Copyright
 
-Copyright 2014 [Max Arnold](http://ar0.me/blog/en/), all rights reserved.
+Copyright 2014-2017 [Max Arnold](http://ar0.me/blog/en/), all rights reserved.
 
 This software is released under the MIT License.
