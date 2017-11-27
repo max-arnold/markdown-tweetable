@@ -237,7 +237,7 @@ NOTES:
 
 ### SVG Icons
 
-Default share buttons are rendered using [Super Tiny Social Icons](https://github.com/edent/SuperTinySocialIcons).
+Default share buttons are rendered using [Super Tiny Icons](https://github.com/edent/SuperTinyIcons).
 
 ## Dependencies
 
