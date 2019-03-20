@@ -35,21 +35,6 @@ Full syntax:
     -- Vladimir Lenin
     [/tweetable]
 
-If you plan to use Google+ button, you need to include the following JavaScript just before your `</body>` tag:
-
-    <script type="text/javascript">
-      (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/client:plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      })();
-    </script>
-
-Also you need oAuth 2.0 client ID, as described in the [documentation](https://developers.google.com/+/web/share/interactive#adding_the_share_button_to_your_page). To inject it, [specify](http://pythonhosted.org/Markdown/reference.html#extensions) `gcid` configuration parameter when initializing class instance:
-
-    TweetableExtension(configs={'gcid': 'xxxx.apps.googleusercontent.com'})
-
-
 And you definitely want to add some style. Below is an example:
 
     blockquote.tweetable {
@@ -87,11 +72,11 @@ And you definitely want to add some style. Below is an example:
 
 List of social networks for sharing. By default contains all supported networks:
 
-    networks=('twitter', 'google', 'facebook', 'linkedin', 'vkontakte',)
+    networks=('twitter', 'facebook', 'linkedin', 'vkontakte',)
 
 You can also specify it as a string (useful if you configured this markdown extension using module path with parameters):
 
-    networks='twitter;google;facebook;linkedin;vkontakte'
+    networks='twitter;facebook;linkedin;vkontakte'
 
 ### HTML snippet
 
@@ -103,16 +88,6 @@ By default it looks like this:
     </blockquote>'''
 
 ### Social button snippets
-
-    snippet_google='''<a href="javascript:void(0)"
-        title="Click to share on Google+"
-        class="tweetable-button g-interactivepost"
-        data-clientid="{gcid}"
-        data-cookiepolicy="single_host_origin"
-        data-contenturl="{url}"
-        data-calltoactionurl="{url}"
-        data-prefilltext="{quote}{hashtags}">
-        {icon_google}</a>'''
 
     snippet_facebook='''<a class="tweetable-button"
         title="Copy the text, then click to share on Facebook"
@@ -138,12 +113,6 @@ By default it looks like this:
         target="_blank">
         {icon_vkontakte}</a>'''
 
-### Google Client ID
-
-By default it is not valid:
-
-    gcid='xxxxx.apps.googleusercontent.com'
-
 ### Social icons
 
     icon_facebook='''
@@ -151,10 +120,6 @@ By default it is not valid:
         <rect fill="#3b5998" height="512" rx="15%" width="512"/>
         <path d="m287 456v-299c0-21 6-35 35-35h38v-63c-7-1-29-3-55-3-54 0-91 33-91 94v306m143-254h-205v72h196" fill="#fff"/>
         </svg>'''
-
-    icon_google='''
-        ...
-    '''
 
     icon_linkedin='''
         ...
@@ -185,19 +150,6 @@ Given all these configuration options, the resulting HTML markup would look like
           <svg>Twitter icon here...</svg>
         </a>
 
-        <a href="javascript:void(0)"
-           title="Click to share on Google+"
-           class="tweetable-button g-interactivepost"
-           data-clientid="xxxx.apps.googleusercontent.com"
-           data-cookiepolicy="single_host_origin"
-           data-contenturl="http://www.brainyquote.com/quotes/authors/v/vladimir_lenin.html"
-           data-calltoactionurl="http://www.brainyquote.com/quotes/authors/v/vladimir_lenin.html"
-           data-prefilltext="When there is state there can be no freedom,
-                             but when there is freedom there will be no state.
-                             -- Vladimir Lenin">
-          <svg>Google+ icon here...</svg>
-        </a>
-
         <a class="tweetable-button"
             title="Copy the text, then click to share on Facebook"
             href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.brainyquote.com%2Fquotes%2Fauthors%2Fv%2Fvladimir_lenin.html"
@@ -225,7 +177,6 @@ Given all these configuration options, the resulting HTML markup would look like
 ### Button docs:
 
 * https://developers.facebook.com/docs/plugins/share-button/
-* https://developers.google.com/+/web/share/interactive
 * http://developer.linkedin.com/documents/share-linkedin
 * https://dev.twitter.com/docs/tweet-button
 * http://vk.com/dev/share_details

@@ -29,7 +29,7 @@ TWEETABLE_RE = r'''
 HASHTAGS_RE = re.compile(r'^(?:(#\w+)(?:\s+(#\w+))*)?', re.UNICODE)
 
 # TODO: email
-NETWORKS = ('twitter', 'google', 'facebook', 'linkedin', 'vkontakte',)
+NETWORKS = ('twitter', 'facebook', 'linkedin', 'vkontakte',)
 
 SNIPPET = '''<blockquote class="tweetable">
 <p>{quote}</p>
@@ -38,39 +38,6 @@ SNIPPET = '''<blockquote class="tweetable">
 
 # TODO: find a way to get current page url if not specified
 # TODO: button text localization
-
-ICON_GOOGLE = (
-    '<svg role="img" class="tweetable-svg-icon" viewBox="0 0 512 512" '
-    'xmlns="http://www.w3.org/2000/svg">'
-    '<rect fill="#dd4f43" height="512" rx="15%" width="512"/>'
-    '<path d="m56 257a126 126 0 0 1 212-96l-33 33c-21-13-49-24-75-14a80 '
-    '80 0 1 0 54 151c21-8 35-28 41-48l-72-1v-44h122c1 36-3 74-27 102a127 '
-    '127 0 0 1 -222-83zm327-56h36l1 37h36v37h-36l-1 36h-36v-36h-37v-37h37z" '
-    'fill="#fff"/>'
-    '</svg>'
-)
-
-SNIPPET_GOOGLE = (
-    '<a href="javascript:void(0)" '
-    'title="Click to share on Google+" '
-    'class="tweetable-button g-interactivepost" '
-    'data-clientid="{gcid}" '
-    'data-cookiepolicy="single_host_origin" '
-    'data-contenturl="{url}" '
-    'data-calltoactionurl="{url}" '
-    'data-prefilltext="{quote}{hashtags}">'
-    '{icon_google}</a>'
-)
-
-def create_google_button(url, quote, hashtags, config):
-    return config['snippet_google'].format(
-        url=url,
-        urlq=quote_plus(url),
-        quote=quote,
-        hashtags=format_hashtags(hashtags),
-        gcid=config['gcid'],
-        icon_google=config['icon_google']
-)
 
 ICON_FACEBOOK = (
     '<svg role="img" class="tweetable-svg-icon" viewBox="0 0 512 512" '
@@ -192,7 +159,6 @@ def create_vkontakte_button(url, quote, hashtags, config):
 
 
 BUTTONS = {
-    'google': create_google_button,
     'facebook': create_facebook_button,
     'linkedin': create_linkedin_button,
     'twitter': create_twitter_button,
@@ -243,10 +209,6 @@ class TweetableExtension(Extension):
             'snippet_facebook': [SNIPPET_FACEBOOK, 'Facebook HTML snippet.'],
             'icon_facebook': [ICON_FACEBOOK, 'Facebook SVG icon.'],
 
-            'snippet_google': [SNIPPET_GOOGLE, 'Google+ HTML snippet.'],
-            'icon_google': [ICON_GOOGLE, 'Google+ SVG icon.'],
-            'gcid': ['xxxxx.apps.googleusercontent.com', 'Google Client ID.'],
-
             'snippet_linkedin': [SNIPPET_LINKEDIN, 'LinkedIn HTML snippet.'],
             'icon_linkedin': [ICON_LINKEDIN, 'LinkedIn SVG icon.'],
 
@@ -266,8 +228,6 @@ class TweetableExtension(Extension):
         diff = set(networks).difference(set(NETWORKS))
         if diff:
             raise ValueError('Unsupported social network(s): {}'.format(', '.join(list(diff))))
-
-        # TODO: validate gcid if google is enabled
 
         networks = networks or NETWORKS
         self.setConfig('networks', networks)
